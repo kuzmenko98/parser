@@ -38,10 +38,12 @@ curl_close($curl);
 $domResults = new simple_html_dom();
 
 $domResults->load($result);
-
+echo $result;
     foreach ($domResults->find('div.r') as $elements) {
         $title = $elements->find('h3', 0)->plaintext;
         $link = $elements->find('a', 0)->href;
+        echo $title . '<br>';
+        echo $link . '<br>';
         $sql = 'INSERT INTO query(title,link) VALUES(:title,:link)';
         $query = $pdo->prepare($sql);
         $query->execute(['title' => $title, 'link' => $link]);
